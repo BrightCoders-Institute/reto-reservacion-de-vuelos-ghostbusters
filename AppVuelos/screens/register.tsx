@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {SafeAreaView, View, StyleSheet, Text, Pressable} from 'react-native';
+import {SafeAreaView, View, StyleSheet, Text} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Input from '../components/Input';
+import {Link} from '@react-navigation/native';
+import Buttons from '../components/buttons';
 
 function Register(): JSX.Element {
   return (
@@ -26,21 +27,12 @@ function Register(): JSX.Element {
           <CheckBox />
           <Text>Subscribe for select product updates.</Text>
         </View>
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Sign up</Text>
-          </Pressable>
-          <Text style={styles.textNormal}>or</Text>
-          <Pressable style={styles.button}>
-            <Ionicons name="logo-google" size={22} color={'#fff'} />
-            <Text style={styles.buttonText}> Sign Up with Google </Text>
-          </Pressable>
-        </View>
+        <Buttons label="Up" />
         <View style={styles.rowContainer}>
           <Text style={styles.textLogin}>Already have an account? </Text>
-          <Pressable>
-            <Text style={styles.TextLoginLink}>Log in</Text>
-          </Pressable>
+          <Link to={{screen: 'Login'}} style={styles.TextLoginLink}>
+            Sign in
+          </Link>
         </View>
       </View>
     </SafeAreaView>
@@ -71,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   passwordDetails: {
-    color: '#9FA9FB',
+    color: '#000',
     marginBottom: 20,
     marginTop: -10,
   },
