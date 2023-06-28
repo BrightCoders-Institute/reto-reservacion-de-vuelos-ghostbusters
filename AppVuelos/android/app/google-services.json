@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "227704013235",
+    "project_id": "appvuelos-16ac9",
+    "storage_bucket": "appvuelos-16ac9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227704013235:android:ca6cb9c44cbbdd9b6dcbc6",
+        "android_client_info": {
+          "package_name": "com.appvuelos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227704013235-8rflehc9vvqv6lni0cgsabbm02neb7hp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appvuelos",
+            "certificate_hash": "4c254b504dccff09c13425dc6fe643285012f1a6"
+          }
+        },
+        {
+          "client_id": "227704013235-sin9e5qi1ik26ua90jaa5sd6uu9q9re8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMBjX8Dm0-hVCTEe0OeEI5V1ZkQuuCIew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227704013235-sin9e5qi1ik26ua90jaa5sd6uu9q9re8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
