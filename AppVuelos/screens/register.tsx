@@ -7,6 +7,7 @@ import FormStyles from '../styles/FormStyles';
 import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
+import getFormData from '../hook/getRegisterData';
 
 function Register(): JSX.Element {
   const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
@@ -30,6 +31,11 @@ function Register(): JSX.Element {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
     setEmailError(isValidEmail ? null : 'Email is invalid');
     setEmail(text);
+  };
+
+  const handleButtonClick = () => {
+    const formData = getFormData(firstName, email, password);
+    console.log(formData);
   };
 
   function areFieldsFilled(): boolean {
@@ -110,7 +116,12 @@ function Register(): JSX.Element {
           />
           <Text>Subscribe for select product updates.</Text>
         </View>
-        <Buttons label="Up" disabled={!areFieldsFilled()} />
+        <Buttons
+          label="Up"
+          disabled={!areFieldsFilled()}
+          onPress={handleButtonClick}
+        />
+
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Already have an account? </Text>
           <Link to={{screen: 'Login'}} style={FormStyles.TextLoginLink}>

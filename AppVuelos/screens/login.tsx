@@ -8,6 +8,7 @@ import FormStyles from '../styles/FormStyles';
 import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
+import getLoginData from '../hook/getLoginData';
 
 function Login(): JSX.Element {
   const {passwordVisibility, rightIcon, handlePasswordVisibility} =
@@ -28,6 +29,11 @@ function Login(): JSX.Element {
     const isValid = passwordRegex.test(text);
     setPasswordError(isValid ? null : 'Password is invalid');
     setPassword(text);
+  };
+
+  const handleButtonClick = () => {
+    const formData = getLoginData(email, password);
+    console.log(formData);
   };
 
   function areFieldsFilled(): boolean {
@@ -78,7 +84,11 @@ function Login(): JSX.Element {
             </Pressable>
           </View>
         </View>
-        <Buttons label="In" disabled={!areFieldsFilled()} />
+        <Buttons
+          label="In"
+          disabled={!areFieldsFilled()}
+          onPress={handleButtonClick}
+        />
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Don't have an account? </Text>
           <Link to={{screen: 'Register'}} style={FormStyles.TextLoginLink}>
