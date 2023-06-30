@@ -1,26 +1,33 @@
 import {StyleSheet} from 'react-native';
-import {primaryColor, accentColor, secondaryColor} from './colors';
+import {primaryColor, secondaryColor, accentColor} from './colors';
 
-const loginStyles = StyleSheet.create({
+const FormStyles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 15,
+  },
+  passwordError: {
+    color: 'red',
+    marginBottom: '10',
   },
   title: {
     color: primaryColor,
     fontSize: 30,
     fontWeight: '900',
   },
-  rowContainer: {
+  marginContainer: {
     marginVertical: 30,
+    columnGap: 10,
+  },
+  rowContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 10,
   },
   checkbox: {
     justifyContent: 'flex-start',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   passwordDetails: {
     color: accentColor,
@@ -41,4 +48,4 @@ const loginStyles = StyleSheet.create({
   },
 });
 
-export default loginStyles;
+export default FormStyles;
