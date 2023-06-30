@@ -10,13 +10,16 @@ const buttonStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: '#929292',
+    backgroundColor: '#5C6EF8',
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
     columnGap: 3,
+  },
+  disabledButton: {
+    backgroundColor: '#929292',
   },
   buttonText: {
     color: 'white',

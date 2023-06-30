@@ -5,12 +5,15 @@ import buttonStyles from '../styles/ButtonStyle';
 
 interface ButtonProps {
   label: string;
+  disabled: boolean;
 }
 
-const Buttons: React.FC<ButtonProps> = ({label}) => {
+const Buttons: React.FC<ButtonProps> = ({label, disabled}) => {
   return (
     <View style={buttonStyles.buttonContainer}>
-      <Pressable style={buttonStyles.button}>
+      <Pressable
+        style={[buttonStyles.button, disabled && buttonStyles.disabledButton]}
+        disabled={disabled}>
         <Text style={buttonStyles.buttonText}>Sign {label}</Text>
       </Pressable>
       <Text style={buttonStyles.textNormal}>or</Text>

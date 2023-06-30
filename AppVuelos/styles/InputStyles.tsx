@@ -4,12 +4,11 @@ const inputStyles = StyleSheet.create({
   input: {
     borderColor: '#9FA9FB',
     borderWidth: 2,
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
     marginBottom: 15,
     marginTop: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    padding: 8,
   },
   label: {
     color: '#929292',
@@ -26,11 +25,21 @@ const inputStyles = StyleSheet.create({
     alignItems: 'center',
   },
   passwordField: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    padding: 8,
     width: '90%',
+  },
+  labelerror: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  error: {
+    color: 'red',
+    fontSize: 14,
+    marginLeft: 10,
+    fontWeight: '300',
   },
 });
 
