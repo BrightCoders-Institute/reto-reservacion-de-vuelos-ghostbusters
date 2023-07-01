@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, Text, TextInput, Pressable} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {Link} from '@react-navigation/native';
@@ -8,6 +8,8 @@ import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
 import getFormData from '../hook/getRegisterData';
+import {auth} from '../firebase';
+import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
 
 function Register(): JSX.Element {
   const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
@@ -19,6 +21,7 @@ function Register(): JSX.Element {
   const [email, setEmail] = useState('');
   const [errorEmail, setEmailError] = useState<string | null>(null);
   const [errorPassword, setPasswordError] = useState<string | null>(null);
+  
 
   const handlePasswordChange = (text: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
@@ -33,9 +36,15 @@ function Register(): JSX.Element {
     setEmail(text);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     const formData = getFormData(firstName, email, password);
     console.log(formData);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      console.log(userCredential)
+    }).catch((error) => {
+      console.log(error)
+    })
   };
 
   function areFieldsFilled(): boolean {

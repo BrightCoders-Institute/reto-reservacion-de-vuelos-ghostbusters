@@ -9,6 +9,10 @@ import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
 import getLoginData from '../hook/getLoginData';
+import {auth} from '../firebase';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 function Login(): JSX.Element {
   const {passwordVisibility, rightIcon, handlePasswordVisibility} =
@@ -34,6 +38,12 @@ function Login(): JSX.Element {
   const handleButtonClick = () => {
     const formData = getLoginData(email, password);
     console.log(formData);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      console.log('Usuario inicio sesión')
+    }).catch((error) => {
+      console.log(error)
+    })
   };
 
   function areFieldsFilled(): boolean {
