@@ -1,7 +1,7 @@
 import react from 'react';
 import {View, Text} from 'react-native';
 
-function test(): JSX.Element {
+function Test(): JSX.Element {
   return(
     <View>
       <Text>Welcome</Text>
@@ -9,4 +9,4 @@ function test(): JSX.Element {
   );
 }
 
-export default test;
+export default Test;

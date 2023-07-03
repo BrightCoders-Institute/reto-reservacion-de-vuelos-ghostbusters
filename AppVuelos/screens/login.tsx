@@ -11,8 +11,7 @@ import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
 import getLoginData from '../hook/getLoginData';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
 
 function Login(): JSX.Element {
   const {passwordVisibility, rightIcon, handlePasswordVisibility} =
@@ -21,6 +20,8 @@ function Login(): JSX.Element {
   const [email, setEmail] = useState<string>('');
   const [errorEmail, setEmailError] = useState<string | null>(null);
   const [errorPassword, setPasswordError] = useState<string | null>(null);
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const navigation = useNavigation();
 
   const handleEmailChange = (text: string) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
@@ -41,8 +42,10 @@ function Login(): JSX.Element {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       console.log('Usuario inicio sesión')
+      navigation.navigate('Test' as never)
     }).catch((error) => {
       console.log(error)
+      setLoginError('Incorrect email and/or password')
     })
   };
 
@@ -94,6 +97,7 @@ function Login(): JSX.Element {
             </Pressable>
           </View>
         </View>
+        {loginError && <Text style={inputStyles.error}>{loginError}</Text>}
         <Buttons
           label="In"
           disabled={!areFieldsFilled()}

@@ -10,6 +10,7 @@ import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
 import getFormData from '../hook/getRegisterData';
 import {auth} from '../firebase';
 import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
+import {useNavigation} from '@react-navigation/native';
 
 function Register(): JSX.Element {
   const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
@@ -21,8 +22,9 @@ function Register(): JSX.Element {
   const [email, setEmail] = useState('');
   const [errorEmail, setEmailError] = useState<string | null>(null);
   const [errorPassword, setPasswordError] = useState<string | null>(null);
+  const [registerError, setRegisterError] = useState<string | null>(null);
+  const navigation = useNavigation();
   
-
   const handlePasswordChange = (text: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
     const isValid = passwordRegex.test(text);
@@ -42,15 +44,20 @@ function Register(): JSX.Element {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       console.log(userCredential)
+      navigation.navigate('Test' as never)
     }).catch((error) => {
       console.log(error)
+      setRegisterError('Email in use. Use a different email')
     })
   };
 
   function areFieldsFilled(): boolean {
+    const isValidEmail = /\S+@\S+\.\S+/.test(email);
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+    const isValidPassword = passwordRegex.test(password);
     return (
       firstName !== '' && email !== '' && password !== '' && toggleCheckBox1
-    );
+    ) && isValidEmail && isValidPassword;
   }
 
   return (
@@ -70,9 +77,7 @@ function Register(): JSX.Element {
         <View>
           <View style={inputStyles.labelerror}>
             <Text style={inputStyles.label}>Email*</Text>
-            {email !== '' && errorEmail && (
-              <Text style={inputStyles.error}>{errorEmail}</Text>
-            )}
+            {registerError && <Text style={inputStyles.error}>{registerError}</Text>}
           </View>
           <TextInput
             style={inputStyles.input}
