@@ -6,8 +6,8 @@ import Buttons from '../components/buttons';
 import FormStyles from '../styles/FormStyles';
 import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
-import getFormData from '../hook/getRegisterData';
+import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
+import getFormData from '../hooks/getRegisterData';
 import {auth} from '../firebase';
 import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
 import {useNavigation} from '@react-navigation/native';
@@ -23,7 +23,7 @@ function Register(): JSX.Element {
   const [errorEmail, setEmailError] = useState<string | null>(null);
   const [errorPassword, setPasswordError] = useState<string | null>(null);
   const [registerError, setRegisterError] = useState<string | null>(null);
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   
   const handlePasswordChange = (text: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
@@ -44,7 +44,7 @@ function Register(): JSX.Element {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       console.log(userCredential)
-      navigation.navigate('Test' as never)
+      navigation.replace('Test')
     }).catch((error) => {
       console.log(error)
       setRegisterError('Email in use. Use a different email')

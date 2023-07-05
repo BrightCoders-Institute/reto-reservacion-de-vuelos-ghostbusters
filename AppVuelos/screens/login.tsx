@@ -7,8 +7,8 @@ import Buttons from '../components/buttons';
 import FormStyles from '../styles/FormStyles';
 import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
-import getLoginData from '../hook/getLoginData';
+import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
+import getLoginData from '../hooks/getLoginData';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {useNavigation} from '@react-navigation/native';
@@ -21,7 +21,7 @@ function Login(): JSX.Element {
   const [errorEmail, setEmailError] = useState<string | null>(null);
   const [errorPassword, setPasswordError] = useState<string | null>(null);
   const [loginError, setLoginError] = useState<string | null>(null);
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const handleEmailChange = (text: string) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
@@ -41,8 +41,9 @@ function Login(): JSX.Element {
     console.log(formData);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-      console.log('Usuario inicio sesión')
-      navigation.navigate('Test' as never)
+      console.log('Usuario inicio sesion')
+      navigation.replace('Test')
+      console.log(email)
     }).catch((error) => {
       console.log(error)
       setLoginError('Incorrect email and/or password')
