@@ -2,6 +2,8 @@ import React from 'react';
 import {View, Text, Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import buttonStyles from '../styles/ButtonStyle';
+import {_signInWithGoogle} from '../hooks/GoogleSignIn';
+import {useNavigation} from '@react-navigation/native';
 
 interface ButtonProps {
   label: string;
@@ -10,6 +12,17 @@ interface ButtonProps {
 }
 
 const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
+  const navigation = useNavigation();
+
+  async function googleSignIn() {
+    _signInWithGoogle().then(data => {
+      if (!data) {
+        return;
+      }
+      navigation.navigate('Test' as never)
+    });
+  }
+
   return (
     <View style={buttonStyles.buttonContainer}>
       <Pressable
@@ -19,7 +32,7 @@ const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
         <Text style={buttonStyles.buttonText}>Sign {label}</Text>
       </Pressable>
       <Text style={buttonStyles.textNormal}>or</Text>
-      <Pressable style={buttonStyles.button}>
+      <Pressable style={buttonStyles.button} onPress={() => googleSignIn()}>
         <Ionicons name="logo-google" size={22} color={'#fff'} />
         <Text style={buttonStyles.buttonText}> Sign {label} with Google</Text>
       </Pressable>
