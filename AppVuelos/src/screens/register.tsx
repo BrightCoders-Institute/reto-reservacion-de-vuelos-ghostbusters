@@ -8,7 +8,7 @@ import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
 import getFormData from '../hooks/getRegisterData';
-import {auth} from '../firebase';
+import {auth} from '../../firebase';
 import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
 import {useNavigation} from '@react-navigation/native';
 
