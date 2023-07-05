@@ -7,49 +7,49 @@ import Buttons from '../components/buttons';
 import FormStyles from '../styles/FormStyles';
 import inputStyles from '../styles/InputStyles';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useTogglePasswordVisibility} from '../hook/useTogglePasswordVisibility';
-import getLoginData from '../hook/getLoginData';
-import {auth} from '../firebase';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
 import {useNavigation} from '@react-navigation/native';
+import handleLogIn from '../hooks/HandleLogin';
 
-function Login(): JSX.Element {
+function Login() {
   const {passwordVisibility, rightIcon, handlePasswordVisibility} =
     useTogglePasswordVisibility();
-  const [password, setPassword] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [errorEmail, setEmailError] = useState<string | null>(null);
-  const [errorPassword, setPasswordError] = useState<string | null>(null);
-  const [loginError, setLoginError] = useState<string | null>(null);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [errorEmail, setEmailError] = useState(null);
+  const [errorPassword, setPasswordError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
   const navigation = useNavigation();
 
-  const handleEmailChange = (text: string) => {
+  const handleEmailChange = (text) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
     setEmailError(isValidEmail ? null : 'Email is invalid');
     setEmail(text);
   };
 
-  const handlePasswordChange = (text: string) => {
+  const handlePasswordChange = (text) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
     const isValid = passwordRegex.test(text);
     setPasswordError(isValid ? null : 'Password is invalid');
     setPassword(text);
   };
 
-  const handleButtonClick = () => {
-    const formData = getLoginData(email, password);
-    console.log(formData);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-      console.log('Usuario inicio sesión')
-      navigation.navigate('Test' as never)
-    }).catch((error) => {
-      console.log(error)
-      setLoginError('Incorrect email and/or password')
-    })
+  const handleOnLogin = async () => {
+    try {
+      const user = await handleLogIn(email, password);
+      if (user.hasOwnProperty('typeError')) {
+        console.log(user);
+        setLoginError(user);
+      }
+      else{
+        navigation.replace('Test')
+      }
+    } catch (error) {
+      console.error('Error signing up:', error);
+    }
   };
 
-  function areFieldsFilled(): boolean {
+  function areFieldsFilled() {
     return email !== '' && password !== '';
   }
 
@@ -101,7 +101,7 @@ function Login(): JSX.Element {
         <Buttons
           label="In"
           disabled={!areFieldsFilled()}
-          onPress={handleButtonClick}
+          onPress={handleOnLogin}
         />
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Don't have an account? </Text>
