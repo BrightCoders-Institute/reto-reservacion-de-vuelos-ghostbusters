@@ -9,7 +9,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
 import getFormData from '../hooks/getRegisterData';
 import {auth} from '../../firebase';
-import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import LoadingModal from '../components/loadingModal';
 
@@ -25,8 +25,10 @@ function Register(): JSX.Element {
   const [errorPassword, setPasswordError] = useState<string | null>(null);
   const [registerError, setRegisterError] = useState<string | null>(null);
   const navigation = useNavigation<any>();
-  const [visible,setvisible] =useState(false);
+  const [visible, setvisible] = useState(false);
   const [complated, setComplated] = useState(false);
+  const [icon, setIcon] = useState('');
+  const [confirmation, setConfirmation] = useState('');
 
   const handlePasswordChange = (text: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
@@ -46,19 +48,31 @@ function Register(): JSX.Element {
     const formData = getFormData(firstName, email, password);
     console.log(formData);
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-      console.log(userCredential)
-      setTimeout(() => {
-        setComplated(true);
-      },500)
-      setTimeout(() => {
-        setvisible(false);
-        navigation.replace('Login')
-      },1000)
-    }).catch((error) => {
-      console.log(error)
-      setRegisterError('Email in use. Use a different email')
-    })
+      .then(userCredential => {
+        console.log(userCredential);
+        setIcon('checkmark-circle-outline');
+        setConfirmation('Sign In');
+        setTimeout(() => {
+          setComplated(true);
+        }, 1000);
+        setTimeout(() => {
+          setvisible(false);
+          navigation.replace('Login');
+        }, 2000);
+      })
+      .catch(error => {
+        console.log(error);
+        setIcon('close-circle-outline');
+        setConfirmation('Error');
+        setTimeout(() => {
+          setComplated(true);
+        }, 1000);
+        setTimeout(() => {
+          setvisible(false);
+        }, 2000);
+        setRegisterError('Email in use. Use a different email');
+        setComplated(false);
+      });
   };
 
   function areFieldsFilled(): boolean {
@@ -66,8 +80,13 @@ function Register(): JSX.Element {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
     const isValidPassword = passwordRegex.test(password);
     return (
-      firstName !== '' && email !== '' && password !== '' && toggleCheckBox1
-    ) && isValidEmail && isValidPassword;
+      firstName !== '' &&
+      email !== '' &&
+      password !== '' &&
+      toggleCheckBox1 &&
+      isValidEmail &&
+      isValidPassword
+    );
   }
 
   return (
@@ -87,7 +106,9 @@ function Register(): JSX.Element {
         <View>
           <View style={inputStyles.labelerror}>
             <Text style={inputStyles.label}>Email*</Text>
-            {registerError && <Text style={inputStyles.error}>{registerError}</Text>}
+            {registerError && (
+              <Text style={inputStyles.error}>{registerError}</Text>
+            )}
           </View>
           <TextInput
             style={inputStyles.input}
@@ -145,7 +166,13 @@ function Register(): JSX.Element {
           disabled={!areFieldsFilled()}
           onPress={handleButtonClick}
         />
-        <LoadingModal visible={visible} message='Signing Up' confirmation='Signed Up' complated={complated}/>
+        <LoadingModal
+          icon={icon}
+          visible={visible}
+          message="Signing Up"
+          confirmation={confirmation}
+          complated={complated}
+        />
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Already have an account? </Text>
           <Link to={{screen: 'Login'}} style={FormStyles.TextLoginLink}>

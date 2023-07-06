@@ -10,9 +10,16 @@ interface InputProps {
   message: string;
   complated: boolean;
   confirmation: string;
+  icon: string;
 }
 
-const LoadingModal: React.FC<InputProps> = ({visible, complated, message, confirmation}) => {
+const LoadingModal: React.FC<InputProps> = ({
+  visible,
+  complated,
+  message,
+  confirmation,
+  icon,
+}) => {
   if (!visible) {
     return null;
   }
@@ -22,11 +29,7 @@ const LoadingModal: React.FC<InputProps> = ({visible, complated, message, confir
         <View style={loadingStyles.confirmationContainer}>
           {complated ? (
             <>
-              <Ionicons
-                name="checkmark-circle-outline"
-                size={60}
-                color={primaryColor}
-              />
+              <Ionicons name={icon} size={60} color={primaryColor} />
               <Text style={loadingStyles.label}>{confirmation}</Text>
             </>
           ) : (

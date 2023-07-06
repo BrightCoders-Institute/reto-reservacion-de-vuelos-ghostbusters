@@ -21,8 +21,10 @@ function Login() {
   const [errorPassword, setPasswordError] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const navigation = useNavigation();
-  const [visible,setvisible] =useState(false);
+  const [visible, setvisible] = useState(false);
   const [complated, setComplated] = useState(false);
+  const [icon, setIcon] = useState('');
+  const [confirmation, setConfirmation] = useState('');
 
   const handleEmailChange = (text) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
@@ -39,20 +41,32 @@ function Login() {
 
   const handleOnLogin = async () => {
     try {
+      setComplated(false);
       const user = await handleLogIn(email, password);
       if (user.hasOwnProperty('typeError')) {
+        setvisible(true);
         console.log(user);
+        setIcon('close-circle-outline');
+        setConfirmation('Error');
+        setTimeout(() => {
+          setComplated(true);
+        }, 1000);
+        setTimeout(() => {
+          setvisible(false);
+        }, 2000);
         setLoginError('Incorrect email and/or password');
       }
       else{
         setvisible(true);
+        setIcon('checkmark-circle-outline');
+        setConfirmation('Sign In');
         setTimeout(() => {
           setComplated(true);
-        },500)
+        },1000)
         setTimeout(() => {
           setvisible(false);
           navigation.replace('Test')
-        },1000)
+        },2000)
       }
     } catch (error) {
       console.error('Error signing up:', error);
@@ -116,7 +130,13 @@ function Login() {
           disabled={!areFieldsFilled()}
           onPress={handleOnLogin}
         />
-        <LoadingModal visible={visible} message='Signing In' confirmation='Signed in' complated={complated}/>
+        <LoadingModal
+          icon={icon}
+          visible={visible}
+          message="Signing In"
+          confirmation={confirmation}
+          complated={complated}
+        />
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Don't have an account? </Text>
           <Link to={{screen: 'Register'}} style={FormStyles.TextLoginLink}>
