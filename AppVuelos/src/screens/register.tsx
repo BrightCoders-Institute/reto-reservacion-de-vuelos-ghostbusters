@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View, Text, TextInput, Pressable} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {Link} from '@react-navigation/native';
