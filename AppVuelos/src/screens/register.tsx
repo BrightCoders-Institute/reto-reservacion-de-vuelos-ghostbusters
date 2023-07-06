@@ -11,6 +11,7 @@ import getFormData from '../hooks/getRegisterData';
 import {auth} from '../../firebase';
 import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
 import {useNavigation} from '@react-navigation/native';
+import LoadingModal from '../components/loadingModal';
 
 function Register(): JSX.Element {
   const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
@@ -24,7 +25,9 @@ function Register(): JSX.Element {
   const [errorPassword, setPasswordError] = useState<string | null>(null);
   const [registerError, setRegisterError] = useState<string | null>(null);
   const navigation = useNavigation<any>();
-  
+  const [visible,setvisible] =useState(false);
+  const [complated, setComplated] = useState(false);
+
   const handlePasswordChange = (text: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
     const isValid = passwordRegex.test(text);
@@ -39,12 +42,19 @@ function Register(): JSX.Element {
   };
 
   const handleButtonClick = async () => {
+    setvisible(true);
     const formData = getFormData(firstName, email, password);
     console.log(formData);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       console.log(userCredential)
-      navigation.replace('Test')
+      setTimeout(() => {
+        setComplated(true);
+      },500)
+      setTimeout(() => {
+        setvisible(false);
+        navigation.replace('Login')
+      },1000)
     }).catch((error) => {
       console.log(error)
       setRegisterError('Email in use. Use a different email')
@@ -135,7 +145,7 @@ function Register(): JSX.Element {
           disabled={!areFieldsFilled()}
           onPress={handleButtonClick}
         />
-
+        <LoadingModal visible={visible} message='Signing Up' confirmation='Signed Up' complated={complated}/>
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Already have an account? </Text>
           <Link to={{screen: 'Login'}} style={FormStyles.TextLoginLink}>

@@ -10,6 +10,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
 import {useNavigation} from '@react-navigation/native';
 import handleLogIn from '../hooks/HandleLogin';
+import LoadingModal from '../components/loadingModal';
 
 function Login() {
   const {passwordVisibility, rightIcon, handlePasswordVisibility} =
@@ -20,6 +21,8 @@ function Login() {
   const [errorPassword, setPasswordError] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const navigation = useNavigation();
+  const [visible,setvisible] =useState(false);
+  const [complated, setComplated] = useState(false);
 
   const handleEmailChange = (text) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
@@ -39,10 +42,17 @@ function Login() {
       const user = await handleLogIn(email, password);
       if (user.hasOwnProperty('typeError')) {
         console.log(user);
-        setLoginError(user);
+        setLoginError('Incorrect email and/or password');
       }
       else{
-        navigation.replace('Test')
+        setvisible(true);
+        setTimeout(() => {
+          setComplated(true);
+        },500)
+        setTimeout(() => {
+          setvisible(false);
+          navigation.replace('Test')
+        },1000)
       }
     } catch (error) {
       console.error('Error signing up:', error);
@@ -50,7 +60,10 @@ function Login() {
   };
 
   function areFieldsFilled() {
-    return email !== '' && password !== '';
+    const isValidEmail = /\S+@\S+\.\S+/.test(email);
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+    const isValidPassword = passwordRegex.test(password);
+    return (email !== '' && password !== '') && isValidEmail && isValidPassword;
   }
 
   return (
@@ -103,6 +116,7 @@ function Login() {
           disabled={!areFieldsFilled()}
           onPress={handleOnLogin}
         />
+        <LoadingModal visible={visible} message='Signing In' confirmation='Signed in' complated={complated}/>
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Don't have an account? </Text>
           <Link to={{screen: 'Register'}} style={FormStyles.TextLoginLink}>
