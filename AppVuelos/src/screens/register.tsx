@@ -46,10 +46,10 @@ function Register(): JSX.Element {
   const handleButtonClick = async () => {
     setvisible(true);
     const formData = getFormData(firstName, email, password);
-    console.log(formData);
+    /* console.log(formData); */
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-        console.log(userCredential);
+        /* console.log(userCredential); */
         setIcon('checkmark-circle-outline');
         setConfirmation('Sign In');
         setTimeout(() => {
@@ -61,7 +61,7 @@ function Register(): JSX.Element {
         }, 2000);
       })
       .catch(error => {
-        console.log(error);
+        /* console.log(error); */
         setIcon('close-circle-outline');
         setConfirmation('Error');
         setTimeout(() => {

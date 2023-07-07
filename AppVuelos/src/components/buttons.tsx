@@ -16,13 +16,16 @@ const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
   const navigation = useNavigation<any>();
   const [visible,setvisible] =useState(false);
   const [complated, setComplated] = useState(false);
+  const [icon, setIcon] = useState('');
 
   async function googleSignIn() {
     _signInWithGoogle().then(data => {
       if (!data) {
+        setIcon('close-circle-outline');
         return;
       }
       setvisible(true);
+      setIcon('checkmark-circle-outline');
       setTimeout(() => {
         setComplated(true);
       },500)
@@ -46,7 +49,7 @@ const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
         <Ionicons name="logo-google" size={22} color={'#fff'} />
         <Text style={buttonStyles.buttonText}> Sign {label} with Google</Text>
       </Pressable>
-      <LoadingModal visible={visible} message='Signing Up' confirmation='Signed Up' complated={complated}/>
+      <LoadingModal icon={icon} visible={visible} message='Signing Up' confirmation='Signed Up' complated={complated}/>
     </View>
   );
 };
