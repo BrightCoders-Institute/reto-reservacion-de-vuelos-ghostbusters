@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import buttonStyles from '../styles/ButtonStyle';
 import {_signInWithGoogle} from '../hooks/GoogleSignIn';
 import {useNavigation} from '@react-navigation/native';
+import LoadingModal from '../components/loadingModal';
 
 interface ButtonProps {
   label: string;
@@ -12,14 +13,26 @@ interface ButtonProps {
 }
 
 const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const [visible,setvisible] =useState(false);
+  const [complated, setComplated] = useState(false);
+  const [icon, setIcon] = useState('');
 
   async function googleSignIn() {
     _signInWithGoogle().then(data => {
       if (!data) {
+        setIcon('close-circle-outline');
         return;
       }
-      navigation.navigate('Test' as never)
+      setvisible(true);
+      setIcon('checkmark-circle-outline');
+      setTimeout(() => {
+        setComplated(true);
+      },500)
+      setTimeout(() => {
+        setvisible(false);
+        navigation.replace('Test')
+      },1000)
     });
   }
 
@@ -36,6 +49,7 @@ const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
         <Ionicons name="logo-google" size={22} color={'#fff'} />
         <Text style={buttonStyles.buttonText}> Sign {label} with Google</Text>
       </Pressable>
+      <LoadingModal icon={icon} visible={visible} message='Signing Up' confirmation='Signed Up' complated={complated}/>
     </View>
   );
 };

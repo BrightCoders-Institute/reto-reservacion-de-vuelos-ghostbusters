@@ -10,6 +10,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useTogglePasswordVisibility} from '../hooks/useTogglePasswordVisibility';
 import {useNavigation} from '@react-navigation/native';
 import handleLogIn from '../hooks/HandleLogin';
+import LoadingModal from '../components/loadingModal';
 
 function Login() {
   const {passwordVisibility, rightIcon, handlePasswordVisibility} =
@@ -20,6 +21,10 @@ function Login() {
   const [errorPassword, setPasswordError] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const navigation = useNavigation();
+  const [visible, setvisible] = useState(false);
+  const [complated, setComplated] = useState(false);
+  const [icon, setIcon] = useState('');
+  const [confirmation, setConfirmation] = useState('');
 
   const handleEmailChange = (text) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(text);
@@ -36,13 +41,32 @@ function Login() {
 
   const handleOnLogin = async () => {
     try {
+      setComplated(false);
       const user = await handleLogIn(email, password);
       if (user.hasOwnProperty('typeError')) {
+        setvisible(true);
         console.log(user);
-        setLoginError(user);
+        setIcon('close-circle-outline');
+        setConfirmation('Error');
+        setTimeout(() => {
+          setComplated(true);
+        }, 1000);
+        setTimeout(() => {
+          setvisible(false);
+        }, 2000);
+        setLoginError('Incorrect email and/or password');
       }
       else{
-        navigation.replace('Test')
+        setvisible(true);
+        setIcon('checkmark-circle-outline');
+        setConfirmation('Sign In');
+        setTimeout(() => {
+          setComplated(true);
+        },1000)
+        setTimeout(() => {
+          setvisible(false);
+          navigation.replace('Test')
+        },2000)
       }
     } catch (error) {
       console.error('Error signing up:', error);
@@ -50,7 +74,10 @@ function Login() {
   };
 
   function areFieldsFilled() {
-    return email !== '' && password !== '';
+    const isValidEmail = /\S+@\S+\.\S+/.test(email);
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+    const isValidPassword = passwordRegex.test(password);
+    return (email !== '' && password !== '') && isValidEmail && isValidPassword;
   }
 
   return (
@@ -102,6 +129,13 @@ function Login() {
           label="In"
           disabled={!areFieldsFilled()}
           onPress={handleOnLogin}
+        />
+        <LoadingModal
+          icon={icon}
+          visible={visible}
+          message="Signing In"
+          confirmation={confirmation}
+          complated={complated}
         />
         <View style={FormStyles.rowContainer}>
           <Text style={FormStyles.textLogin}>Don't have an account? </Text>

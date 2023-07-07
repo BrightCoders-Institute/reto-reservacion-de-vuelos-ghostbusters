@@ -8,14 +8,14 @@ function Test(): JSX.Element {
   const navigation = useNavigation<any>();
 
   const handleOnLogOut = async () => {
-    console.log('handleOnLogOut executed');
+    /* console.log('handleOnLogOut executed'); */
     try {
-      console.log('Before handleLogOut');
+      /* console.log('Before handleLogOut'); */
       await handleLogOut();
-      console.log('After handleLogOut');
+      /* console.log('After handleLogOut'); */
       navigation.replace('Login');
     } catch (error) {
-      console.log('Error:', error);
+      /* console.log('Error:', error); */
     }
   };
 

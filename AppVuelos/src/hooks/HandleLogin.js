@@ -7,10 +7,10 @@ const handleLogIn = async (email, password) => {
       password,
     );
     const user = userCredential.user;
-    console.log('User logged in successfully:', user);
+    /* console.log('User logged in successfully:', user); */
     return user;
   } catch (error) {
-    console.log('Log in error', error);
+    /* console.log('Log in error', error); */
     switch (error.code) {
       case 'auth/invalid-email':
         return {typeError: 'email', message: 'That email address is invalid!'};
