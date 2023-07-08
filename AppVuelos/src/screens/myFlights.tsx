@@ -3,6 +3,7 @@ import {View, Text, Pressable} from 'react-native';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import handleLogOut from '../hooks/HandleLogOut';
+import myFlightsStyles from '../styles/myFlightsStyles';
 
 function Test(): JSX.Element {
   const navigation = useNavigation<any>();
@@ -20,11 +21,13 @@ function Test(): JSX.Element {
   };
 
   return (
-    <View>
-      <Text>Welcome</Text>
-      <Pressable onPress={handleOnLogOut}>
-        <Text>Log Out</Text>
-      </Pressable>
+    <View style={myFlightsStyles.container}>
+      <View style={myFlightsStyles.headerContainer}>
+        <Text style={myFlightsStyles.title}>My Flights</Text>
+        <Pressable onPress={handleOnLogOut}>
+          <Text style={myFlightsStyles.logOutButton}>Log Out</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
