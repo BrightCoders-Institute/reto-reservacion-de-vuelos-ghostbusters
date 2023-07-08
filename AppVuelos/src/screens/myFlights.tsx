@@ -4,6 +4,7 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import handleLogOut from '../hooks/HandleLogOut';
 import myFlightsStyles from '../styles/myFlightsStyles';
+import BookingButton from '../components/bookingButton';
 
 function Test(): JSX.Element {
   const navigation = useNavigation<any>();
@@ -28,6 +29,7 @@ function Test(): JSX.Element {
           <Text style={myFlightsStyles.logOutButton}>Log Out</Text>
         </Pressable>
       </View>
+      <BookingButton />
     </View>
   );
 }

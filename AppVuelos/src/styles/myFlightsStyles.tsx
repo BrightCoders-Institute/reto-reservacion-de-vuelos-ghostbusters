@@ -4,7 +4,7 @@ import { primaryColor, whiteColor, accentColor } from "./colors";
 const myFlightsStyles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 20,
+    margin: 20,
   },
   title: {
     fontSize: 30,
@@ -12,7 +12,6 @@ const myFlightsStyles = StyleSheet.create({
     color: primaryColor,
   },
   headerContainer: {
-    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
