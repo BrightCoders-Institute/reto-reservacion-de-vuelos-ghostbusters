@@ -17,7 +17,8 @@ const myFlightsStyles = StyleSheet.create({
     alignItems: "center",
     borderBottomColor: accentColor,
     borderBottomWidth: 2,
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginBottom: 10,
   },
   logOutButton: {
     backgroundColor: primaryColor,
