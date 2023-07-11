@@ -65,7 +65,7 @@ function Login() {
         },1000)
         setTimeout(() => {
           setvisible(false);
-          navigation.replace('Test')
+          navigation.replace('MyFlights')
         },2000)
       }
     } catch (error) {
