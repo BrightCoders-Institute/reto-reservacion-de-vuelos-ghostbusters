@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {View, Text} from 'react-native';
 import {FlatList} from 'react-native';
 import Flight from './flight';
 import FlightStyles from '../styles/flightsStyles';
@@ -40,12 +41,21 @@ const FlightList = () => {
     />;
   };
 
+  const renderEmptyList = (): JSX.Element => {
+    return (
+      <View>
+        <Text>No Flights Found</Text>
+      </View>
+    );
+  };
+
   return (
       <FlatList
         style={FlightStyles.container}
         data={flights}
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
+        ListEmptyComponent={renderEmptyList}
       />
   );
 };
