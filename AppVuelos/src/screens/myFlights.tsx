@@ -7,9 +7,12 @@ import myFlightsStyles from '../styles/myFlightsStyles';
 import BookingButton from '../components/bookingButton';
 import Flight from '../components/flight';
 import FlightList from '../components/flightList';
+import firestore from '@react-native-firebase/firestore';
+
+
 function Test(): JSX.Element {
   const navigation = useNavigation<any>();
-
+  
   const handleOnLogOut = async () => {
     /* console.log('handleOnLogOut executed'); */
     try {
@@ -22,6 +25,7 @@ function Test(): JSX.Element {
     }
   };
 
+  /*
   const reservations = [
     {
       id: 1,
@@ -96,7 +100,7 @@ function Test(): JSX.Element {
       passengers: 3,
     },
   ];
-
+  */
   return (
     <View style={myFlightsStyles.container}>
       <View style={myFlightsStyles.headerContainer}>
@@ -105,15 +109,7 @@ function Test(): JSX.Element {
           <Text style={myFlightsStyles.logOutButton}>Log Out</Text>
         </Pressable>
       </View>
-      {(reservations === null || reservations.length === 0) ? (
-        <>
-          <Text>No hay reservaciones</Text>
-        </>
-      ):(
-        <>
-          <FlightList flights={reservations}/>
-        </>
-      )}
+      <FlightList />
       <BookingButton />
     </View>
   );

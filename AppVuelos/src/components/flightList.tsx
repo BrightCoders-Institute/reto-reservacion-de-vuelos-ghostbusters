@@ -1,33 +1,51 @@
-import React from 'react';
-import {TextInput, View, Text, FlatList} from 'react-native';
-import inputStyles from '../styles/InputStyles';
+import React, {useEffect, useState} from 'react';
+import {FlatList} from 'react-native';
 import Flight from './flight';
 import FlightStyles from '../styles/flightsStyles';
+import GetFlights from '../hooks/getFlights';
 
-interface Reservation {
+interface FlightList {
   id: number;
-  departure: string;
-  departureState: string;
-  arrival: string;
-  arrivalState: string;
-  date: Date;
+  departurecity: string;
+  departurestate: string;
+  destinationcity: string;
+  destinationstate: string;
+  date: string;
   passengers: number;
 }
 
-interface FlightListProps {
-  flights: Reservation[];
-}
+const FlightList = () => {
+  const [flights, setFlights] = useState<FlightList[]>([]);
 
-const FlightList: React.FC<FlightListProps> = ({flights}) => {
-  const renderItem = ({ item }: { item: Reservation }) => {
-    return <Flight reservation={item} />;
+  useEffect(() => {
+    const getFlightsData = async () => {
+      try {
+        const flightData = await GetFlights();
+        setFlights(flightData);
+      } catch (error) {
+        console.error('Error fetching flights:', error);
+      }
+    };
+    getFlightsData();
+  }, []);
+
+  const renderItem = ({ item }: { item: FlightList }) => {
+    return <Flight 
+      date={item.date} 
+      departurestate={item.departurestate} 
+      departurecity={item.departurecity} 
+      destinationcity={item.destinationcity}
+      destinationstate={item.destinationstate}
+      passengers={item.passengers}
+    />;
   };
+
   return (
       <FlatList
-      style={FlightStyles.container}
-      data={flights}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
+        style={FlightStyles.container}
+        data={flights}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={renderItem}
       />
   );
 };
