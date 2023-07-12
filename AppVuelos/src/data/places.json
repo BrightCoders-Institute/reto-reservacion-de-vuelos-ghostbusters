@@ -1,0 +1,214 @@
+{
+  "flights": [
+    {
+      "id": 1,
+      "cityAbbreviation": "AMS",
+      "cityName": "Amsterdam",
+      "countryName": "Netherlands"
+    },
+    {
+      "id": 2,
+      "cityAbbreviation": "PAR",
+      "cityName": "Paris",
+      "countryName": "France"
+    },
+    {
+      "id": 3,
+      "cityAbbreviation": "MAD",
+      "cityName": "Madrid",
+      "countryName": "Spain"
+    },
+    {
+      "id": 4,
+      "cityAbbreviation": "LON",
+      "cityName": "London",
+      "countryName": "United Kingdom"
+    },
+    {
+      "id": 5,
+      "cityAbbreviation": "ROM",
+      "cityName": "Rome",
+      "countryName": "Italy"
+    },
+    {
+      "id": 6,
+      "cityAbbreviation": "BER",
+      "cityName": "Berlin",
+      "countryName": "Germany"
+    },
+    {
+      "id": 7,
+      "cityAbbreviation": "DUB",
+      "cityName": "Dublin",
+      "countryName": "Ireland"
+    },
+    {
+      "id": 8,
+      "cityAbbreviation": "ATH",
+      "cityName": "Athens",
+      "countryName": "Greece"
+    },
+    {
+      "id": 9,
+      "cityAbbreviation": "PRG",
+      "cityName": "Prague",
+      "countryName": "Czech Republic"
+    },
+    {
+      "id": 10,
+      "cityAbbreviation": "STO",
+      "cityName": "Stockholm",
+      "countryName": "Sweden"
+    },
+    {
+      "id": 11,
+      "cityAbbreviation": "LIS",
+      "cityName": "Lisbon",
+      "countryName": "Portugal"
+    },
+    {
+      "id": 12,
+      "cityAbbreviation": "VIE",
+      "cityName": "Vienna",
+      "countryName": "Austria"
+    },
+    {
+      "id": 13,
+      "cityAbbreviation": "BRU",
+      "cityName": "Brussels",
+      "countryName": "Belgium"
+    },
+    {
+      "id": 14,
+      "cityAbbreviation": "CPH",
+      "cityName": "Copenhagen",
+      "countryName": "Denmark"
+    },
+    {
+      "id": 15,
+      "cityAbbreviation": "OSL",
+      "cityName": "Oslo",
+      "countryName": "Norway"
+    },
+    {
+      "id": 16,
+      "cityAbbreviation": "WAW",
+      "cityName": "Warsaw",
+      "countryName": "Poland"
+    },
+    {
+      "id": 17,
+      "cityAbbreviation": "BUD",
+      "cityName": "Budapest",
+      "countryName": "Hungary"
+    },
+    {
+      "id": 18,
+      "cityAbbreviation": "ZRH",
+      "cityName": "Zurich",
+      "countryName": "Switzerland"
+    },
+    {
+      "id": 19,
+      "cityAbbreviation": "IST",
+      "cityName": "Istanbul",
+      "countryName": "Turkey"
+    },
+    {
+      "id": 20,
+      "cityAbbreviation": "MOS",
+      "cityName": "Moscow",
+      "countryName": "Russia"
+    },
+    {
+      "id": 21,
+      "cityAbbreviation": "HEL",
+      "cityName": "Helsinki",
+      "countryName": "Finland"
+    },
+    {
+      "id": 22,
+      "cityAbbreviation": "CPA",
+      "cityName": "Cape Town",
+      "countryName": "South Africa"
+    },
+    {
+      "id": 23,
+      "cityAbbreviation": "CAI",
+      "cityName": "Cairo",
+      "countryName": "Egypt"
+    },
+    {
+      "id": 24,
+      "cityAbbreviation": "LUX",
+      "cityName": "Luxembourg City",
+      "countryName": "Luxembourg"
+    },
+    {
+      "id": 25,
+      "cityAbbreviation": "BER",
+      "cityName": "Berlin",
+      "countryName": "Germany"
+    },
+    {
+      "id": 26,
+      "cityAbbreviation": "BRN",
+      "cityName": "Bern",
+      "countryName": "Switzerland"
+    },
+    {
+      "id": 27,
+      "cityAbbreviation": "BEL",
+      "cityName": "Belgrade",
+      "countryName": "Serbia"
+    },
+    {
+      "id": 28,
+      "cityAbbreviation": "SOF",
+      "cityName": "Sofia",
+      "countryName": "Bulgaria"
+    },
+    {
+      "id": 29,
+      "cityAbbreviation": "SKP",
+      "cityName": "Skopje",
+      "countryName": "North Macedonia"
+    },
+    {
+      "id": 30,
+      "cityAbbreviation": "TIR",
+      "cityName": "Tirana",
+      "countryName": "Albania"
+    },
+    {
+      "id": 31,
+      "cityAbbreviation": "NYC",
+      "cityName": "New York City",
+      "countryName": "United States"
+    },
+    {
+      "id": 32,
+      "cityAbbreviation": "LAX",
+      "cityName": "Los Angeles",
+      "countryName": "United States"
+    },
+    {
+      "id": 33,
+      "cityAbbreviation": "MEX",
+      "cityName": "Mexico City",
+      "countryName": "Mexico"
+    },
+    {
+      "id": 34,
+      "cityAbbreviation": "TOR",
+      "cityName": "Toronto",
+      "countryName": "Canada"
+    },
+    {
+      "id": 35,
+      "cityAbbreviation": "RIO",
+      "cityName": "Rio de Janeiro",
+      "countryName": "Brazil"
+    }
+  ]
+}
