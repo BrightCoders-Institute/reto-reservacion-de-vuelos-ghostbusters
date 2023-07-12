@@ -11,8 +11,6 @@ const FlightStyles = StyleSheet.create({
   },
   columns: {
     flexDirection: "row",
-    borderBottomColor: secondaryColor,
-    borderBottomWidth: 1,
   },
   departure: {
     alignItems: "flex-start",
@@ -40,9 +38,11 @@ const FlightStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
-    paddingBottom: 10,
+    paddingVertical: 5,
     borderBottomColor: blackColor,
     borderBottomWidth: 1,
+    borderTopColor: secondaryColor,
+    borderTopWidth: 1,
   },
   detailsText: {
     color: blackColor,
