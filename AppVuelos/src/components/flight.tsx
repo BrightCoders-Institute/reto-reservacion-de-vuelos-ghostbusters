@@ -22,7 +22,7 @@ const Flight: React.FC<FlightProps> = ({
   passengers,
 }) => {
   return (
-    <View style={FlightStyles.containerCard}>
+    <View>
       <View style={FlightStyles.columns}>
         <View style={FlightStyles.departure}>
           <Text style={FlightStyles.locations}>{departurecity}</Text>
@@ -34,8 +34,8 @@ const Flight: React.FC<FlightProps> = ({
           )}
         </View>
         <View style={FlightStyles.arrival}>
-          <Text style={FlightStyles.locations}>{destinationstate}</Text>
-          <Text style={FlightStyles.state}>{destinationcity}</Text>
+          <Text style={FlightStyles.locations}>{destinationcity}</Text>
+          <Text style={FlightStyles.state}>{destinationstate}</Text>
         </View>
       </View>
       {destinationcity.length !== 0 ? (

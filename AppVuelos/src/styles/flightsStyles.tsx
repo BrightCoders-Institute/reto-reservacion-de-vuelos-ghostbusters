@@ -5,10 +5,6 @@ const FlightStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerCard: {
-    flex: 1,
-    marginTop: 10,
-  },
   columns: {
     flexDirection: "row",
   },
