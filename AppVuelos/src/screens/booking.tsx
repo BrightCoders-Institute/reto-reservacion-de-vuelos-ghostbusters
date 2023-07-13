@@ -13,10 +13,10 @@ import HandleNext from '../hooks/handleNext';
 
 function Booking(): JSX.Element {
   const [date, setDate] = useState('');
-  const [departureCity, setDepartureCity] = useState('BEG');
-  const [departureState, setDepartureState] = useState('Serbia');
-  const [destinationCity, setDestinationCity] = useState('AMS');
-  const [destinationState, setDestinationState] = useState('Netherlands');
+  const [departureCity, setDepartureCity] = useState('');
+  const [departureState, setDepartureState] = useState('');
+  const [destinationCity, setDestinationCity] = useState('');
+  const [destinationState, setDestinationState] = useState('');
   const [passangers, setPassangers] = useState(2);
   const navigation = useNavigation<any>();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -46,8 +46,8 @@ function Booking(): JSX.Element {
             />
             <View>
               <Text style={BookingStyles.text}>{texTitle()}</Text>
-              {step === 0 && <SelectComponent />}
-              {step === 1 && <SelectComponent />}
+              {step === 0 && <SelectComponent city={departureCity} setCity={setDepartureCity} state={departureState} setState={setDepartureState} />}
+              {step === 1 && <SelectComponent city={destinationCity} setCity={setDestinationCity} state={destinationState} setState={setDestinationState} />}
               {step === 2 && (
                 <Calendar
                   onDayPress={day => {
