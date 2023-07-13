@@ -7,17 +7,17 @@ import BookingStyles from '../styles/bookingStyles';
 import Flight from '../components/flight';
 import SelectComponent from '../components/selectComponent';
 import {Calendar} from 'react-native-calendars';
-import {primaryColor, whiteColor, blackColor} from '../styles/colors';
-import WheelPicker from 'react-native-wheely';
+import {primaryColor, blackColor} from '../styles/colors';
 import HandleNext from '../hooks/handleNext';
 import PassangersPicker from '../components/passangersPicker';
 
+
 function Booking(): JSX.Element {
   const [date, setDate] = useState('');
-  const [departureCity, setDepartureCity] = useState('');
-  const [departureState, setDepartureState] = useState('');
-  const [destinationCity, setDestinationCity] = useState('');
-  const [destinationState, setDestinationState] = useState('');
+  const [departurecity, setDepartureCity] = useState('');
+  const [departurestate, setDepartureState] = useState('');
+  const [destinationcity, setDestinationCity] = useState('');
+  const [destinationstate, setDestinationState] = useState('');
   const [passangers, setPassangers] = useState(0);
   const navigation = useNavigation<any>();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -40,27 +40,27 @@ function Booking(): JSX.Element {
           <View style={BookingStyles.body}>
             <Flight
               date={date}
-              departurecity={departureCity}
-              departurestate={departureState}
-              destinationcity={destinationCity}
-              destinationstate={destinationState}
+              departurecity={departurecity}
+              departurestate={departurestate}
+              destinationcity={destinationcity}
+              destinationstate={destinationstate}
               passengers={passangers}
             />
             <View>
               <Text style={BookingStyles.text}>{texTitle()}</Text>
               {step === 0 && (
                 <SelectComponent
-                  city={departureCity}
+                  city={departurecity}
                   setCity={setDepartureCity}
-                  state={departureState}
+                  state={departurestate}
                   setState={setDepartureState}
                 />
               )}
               {step === 1 && (
                 <SelectComponent
-                  city={destinationCity}
+                  city={destinationcity}
                   setCity={setDestinationCity}
-                  state={destinationState}
+                  state={destinationstate}
                   setState={setDestinationState}
                 />
               )}
