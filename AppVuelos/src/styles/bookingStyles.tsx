@@ -7,12 +7,17 @@ const BookingStyles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20,
   },
+  background: {
+    backgroundColor: whiteColor,
+    flex: 1
+  },
   bookingContainer: {
     flex: 1,
     justifyContent: 'space-between',
   },
   body:{
-    gap: 80,
+    gap: 50,
+    flex: 1,
   },
   button: {
     backgroundColor: secondaryColor,
@@ -31,6 +36,7 @@ const BookingStyles = StyleSheet.create({
     color: blackColor,
     fontSize: 40,
     fontWeight: 'bold',
+    marginBottom: 10
   }
 });
 
