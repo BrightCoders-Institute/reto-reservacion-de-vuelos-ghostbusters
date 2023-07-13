@@ -13,7 +13,7 @@ interface FlightProps {
   passengers: number;
 }
 
-const Flight:React.FC<FlightProps> = ({
+const Flight: React.FC<FlightProps> = ({
   date,
   departurecity,
   departurestate,
@@ -22,24 +22,34 @@ const Flight:React.FC<FlightProps> = ({
   passengers,
 }) => {
   return (
-    <View style={FlightStyles.containerCard}>
+    <View>
       <View style={FlightStyles.columns}>
         <View style={FlightStyles.departure}>
           <Text style={FlightStyles.locations}>{departurecity}</Text>
           <Text style={FlightStyles.state}>{departurestate}</Text>
         </View>
         <View style={FlightStyles.icon}>
-          <FontAwesome5 name="plane" size={20} color={primaryColor} />
+          {departurecity.length !== 0 && departurestate.length !== 0 && (
+            <FontAwesome5 name="plane" size={20} color={primaryColor} />
+          )}
         </View>
         <View style={FlightStyles.arrival}>
-          <Text style={FlightStyles.locations}>{destinationstate}</Text>
-          <Text style={FlightStyles.state}>{destinationcity}</Text>
+          <Text style={FlightStyles.locations}>{destinationcity}</Text>
+          <Text style={FlightStyles.state}>{destinationstate}</Text>
         </View>
       </View>
-      <View style={FlightStyles.details}>
-        <Text style={FlightStyles.detailsText}>{date}</Text>
-        <Text style={FlightStyles.detailsText}>{passengers} passengers</Text>
-      </View>
+      {destinationcity.length !== 0 ? (
+        <View style={FlightStyles.details}>
+          <Text style={FlightStyles.detailsText}>{date}</Text>
+          {passengers !== 0 && (
+            <Text style={FlightStyles.detailsText}>
+              {passengers} passengers
+            </Text>
+          )}
+        </View>
+      ) : (
+        <View></View>
+      )}
     </View>
   );
 };
