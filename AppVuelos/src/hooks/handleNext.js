@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const HandleStep = () => {
+const HandleNext = () => {
   const [step, setStep] = useState(0);
 
   const nextClick = () => {
@@ -48,4 +48,4 @@ const HandleStep = () => {
   };
 };
 
-export default HandleStep;
+export default HandleNext;

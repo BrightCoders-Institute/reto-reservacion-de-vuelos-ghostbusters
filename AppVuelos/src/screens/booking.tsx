@@ -9,10 +9,10 @@ import SelectComponent from '../components/selectComponent';
 import {Calendar} from 'react-native-calendars';
 import {primaryColor, whiteColor, blackColor} from '../styles/colors';
 import WheelPicker from 'react-native-wheely';
-import HandleStep from '../hooks/handleStep';
+import HandleNext from '../hooks/handleNext';
 
 function Booking(): JSX.Element {
-  const [date, setDate] = useState('July 12, 2023');
+  const [date, setDate] = useState('');
   const [departureCity, setDepartureCity] = useState('BEG');
   const [departureState, setDepartureState] = useState('Serbia');
   const [destinationCity, setDestinationCity] = useState('AMS');
@@ -21,7 +21,7 @@ function Booking(): JSX.Element {
   const navigation = useNavigation<any>();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
-  const { step, setStep, nextClick, texTitle, buttonTitle, formatDate } = HandleStep();
+  const { step, setStep, nextClick, texTitle, buttonTitle, formatDate } = HandleNext();
 
   return (
     <SafeAreaView style={BookingStyles.background}>
@@ -52,6 +52,7 @@ function Booking(): JSX.Element {
                 <Calendar
                   onDayPress={day => {
                     setDate(formatDate(day.dateString));
+                    setSelectedDate(day.dateString);
                     console.log('selected day', day);
                   }}
                   minDate="2023-07-12"
