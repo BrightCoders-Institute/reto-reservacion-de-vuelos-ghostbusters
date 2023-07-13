@@ -10,6 +10,7 @@ import {Calendar} from 'react-native-calendars';
 import {primaryColor, whiteColor, blackColor} from '../styles/colors';
 import WheelPicker from 'react-native-wheely';
 import HandleNext from '../hooks/handleNext';
+import PassangersPicker from '../components/passangersPicker';
 
 function Booking(): JSX.Element {
   const [date, setDate] = useState('');
@@ -17,11 +18,12 @@ function Booking(): JSX.Element {
   const [departureState, setDepartureState] = useState('');
   const [destinationCity, setDestinationCity] = useState('');
   const [destinationState, setDestinationState] = useState('');
-  const [passangers, setPassangers] = useState(2);
+  const [passangers, setPassangers] = useState(0);
   const navigation = useNavigation<any>();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
-  const { step, setStep, nextClick, texTitle, buttonTitle, formatDate } = HandleNext();
+  const {step, setStep, nextClick, texTitle, buttonTitle, formatDate} =
+    HandleNext();
 
   return (
     <SafeAreaView style={BookingStyles.background}>
@@ -46,8 +48,22 @@ function Booking(): JSX.Element {
             />
             <View>
               <Text style={BookingStyles.text}>{texTitle()}</Text>
-              {step === 0 && <SelectComponent city={departureCity} setCity={setDepartureCity} state={departureState} setState={setDepartureState} />}
-              {step === 1 && <SelectComponent city={destinationCity} setCity={setDestinationCity} state={destinationState} setState={setDestinationState} />}
+              {step === 0 && (
+                <SelectComponent
+                  city={departureCity}
+                  setCity={setDepartureCity}
+                  state={departureState}
+                  setState={setDepartureState}
+                />
+              )}
+              {step === 1 && (
+                <SelectComponent
+                  city={destinationCity}
+                  setCity={setDestinationCity}
+                  state={destinationState}
+                  setState={setDestinationState}
+                />
+              )}
               {step === 2 && (
                 <Calendar
                   onDayPress={day => {
@@ -68,24 +84,7 @@ function Booking(): JSX.Element {
                 />
               )}
               {step === 3 && (
-                <WheelPicker
-                  selectedIndex={selectedIndex}
-                  options={['1', '2', '3', '4', '5', '6']}
-                  onChange={index => setSelectedIndex(index)}
-                  containerStyle={{marginHorizontal: 100}}
-                  itemTextStyle={{
-                    fontSize: 25,
-                    fontWeight: '900',
-                    color: blackColor,
-                  }}
-                  selectedIndicatorStyle={{
-                    borderLeftColor: primaryColor,
-                    borderLeftWidth: 1,
-                    borderRightColor: primaryColor,
-                    borderRightWidth: 1,
-                    backgroundColor: whiteColor,
-                  }}
-                />
+                <PassangersPicker passangers={passangers} setPassangers={setPassangers}/>
               )}
             </View>
           </View>
