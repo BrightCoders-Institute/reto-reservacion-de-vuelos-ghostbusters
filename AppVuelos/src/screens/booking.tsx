@@ -6,12 +6,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BookingStyles from '../styles/bookingStyles';
 import Flight from '../components/flight';
 import SelectComponent from '../components/selectComponent';
-import {Calendar, LocaleConfig} from 'react-native-calendars';
-import {primaryColor, whiteColor, blackColor, accentColor} from '../styles/colors';
+import {Calendar} from 'react-native-calendars';
+import {primaryColor, whiteColor, blackColor} from '../styles/colors';
 import WheelPicker from 'react-native-wheely';
+import HandleStep from '../hooks/handleStep';
 
 function Booking(): JSX.Element {
-  const [date, setDate] = useState('10 Jun, 2023');
+  const [date, setDate] = useState('July 12, 2023');
   const [departureCity, setDepartureCity] = useState('BEG');
   const [departureState, setDepartureState] = useState('Serbia');
   const [destinationCity, setDestinationCity] = useState('AMS');
@@ -20,6 +21,8 @@ function Booking(): JSX.Element {
   const navigation = useNavigation<any>();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
+  const { step, setStep, nextClick, texTitle, buttonTitle } = HandleStep();
+
   return (
     <SafeAreaView style={BookingStyles.background}>
       <View style={BookingStyles.container}>
@@ -41,59 +44,52 @@ function Booking(): JSX.Element {
               destinationstate={destinationState}
               passengers={passangers}
             />
-            <Text style={BookingStyles.text}>Your request was received.</Text>
-            {/* <View>
-            <Text style={BookingStyles.text}>Where are you now?</Text>
-            <SelectComponent />
-          </View> */}
-            {/* <View>
-            <Text style={BookingStyles.text}>Where will you be flying to?</Text>
-            <SelectComponent />
-          </View> */}
-            {/* <View>
-              <Text style={BookingStyles.text}>Select date</Text>
-              <Calendar
-                onDayPress={day => {
-                  setSelectedDate(day.dateString);
-                  console.log('selected day', day);
-                }}
-                minDate='2023-07-12'
-                markedDates={{
-                  [selectedDate]: {selected: true, dotColor: primaryColor},
-                }}
-                theme={{
-                  todayTextColor: blackColor,
-                  textMonthFontWeight: 'bold',
-                  textMonthFontSize: 20,
-                }}
-                month
+            <View>
+              <Text style={BookingStyles.text}>{texTitle()}</Text>
+              {step === 0 && <SelectComponent />}
+              {step === 1 && <SelectComponent />}
+              {step === 2 && (
+                <Calendar
+                  onDayPress={day => {
+                    setSelectedDate(day.dateString);
+                    console.log('selected day', day);
+                  }}
+                  minDate="2023-07-12"
+                  markedDates={{
+                    [selectedDate]: {selected: true, dotColor: primaryColor},
+                  }}
+                  theme={{
+                    todayTextColor: blackColor,
+                    textMonthFontWeight: 'bold',
+                    textMonthFontSize: 20,
+                  }}
+                  month
                 />
-            </View> */}
-            {/* <View>
-              <Text style={BookingStyles.text}>How many passengers?</Text>
-              <WheelPicker
-                selectedIndex={selectedIndex}
-                options={['1', '2', '3', '4', '5', '6']}
-                onChange={index => setSelectedIndex(index)}
-                containerStyle={{marginHorizontal: 100}}
-                itemTextStyle={{
-                  fontSize: 25,
-                  fontWeight: '900',
-                  color: blackColor,
-                }}
-                selectedIndicatorStyle={{
-                  borderLeftColor: primaryColor,
-                  borderLeftWidth: 1,
-                  borderRightColor: primaryColor,
-                  borderRightWidth: 1,
-                  backgroundColor: whiteColor,
-                }}
-              />
-              <Text>{selectedIndex + 1}</Text>
-            </View> */}
+              )}
+              {step === 3 && (
+                <WheelPicker
+                  selectedIndex={selectedIndex}
+                  options={['1', '2', '3', '4', '5', '6']}
+                  onChange={index => setSelectedIndex(index)}
+                  containerStyle={{marginHorizontal: 100}}
+                  itemTextStyle={{
+                    fontSize: 25,
+                    fontWeight: '900',
+                    color: blackColor,
+                  }}
+                  selectedIndicatorStyle={{
+                    borderLeftColor: primaryColor,
+                    borderLeftWidth: 1,
+                    borderRightColor: primaryColor,
+                    borderRightWidth: 1,
+                    backgroundColor: whiteColor,
+                  }}
+                />
+              )}
+            </View>
           </View>
-          <Pressable style={BookingStyles.button}>
-            <Text style={BookingStyles.textButton}>Next</Text>
+          <Pressable style={BookingStyles.button} onPress={nextClick}>
+            <Text style={BookingStyles.textButton}>{buttonTitle()}</Text>
           </Pressable>
         </View>
       </View>
