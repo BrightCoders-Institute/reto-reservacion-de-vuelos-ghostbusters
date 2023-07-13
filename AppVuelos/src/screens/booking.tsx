@@ -21,7 +21,7 @@ function Booking(): JSX.Element {
   const navigation = useNavigation<any>();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
-  const { step, setStep, nextClick, texTitle, buttonTitle } = HandleStep();
+  const { step, setStep, nextClick, texTitle, buttonTitle, formatDate } = HandleStep();
 
   return (
     <SafeAreaView style={BookingStyles.background}>
@@ -51,7 +51,7 @@ function Booking(): JSX.Element {
               {step === 2 && (
                 <Calendar
                   onDayPress={day => {
-                    setSelectedDate(day.dateString);
+                    setDate(formatDate(day.dateString));
                     console.log('selected day', day);
                   }}
                   minDate="2023-07-12"
