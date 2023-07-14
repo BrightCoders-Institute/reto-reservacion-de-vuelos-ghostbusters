@@ -21,7 +21,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
         /* initialRouteName="Login" */
-        initialRouteName="Booking"
+        initialRouteName="Login"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />

@@ -10,7 +10,10 @@ import {Calendar} from 'react-native-calendars';
 import {primaryColor, blackColor} from '../styles/colors';
 import HandleNext from '../hooks/handleNext';
 import PassangersPicker from '../components/passangersPicker';
+import { uploadDataToFirebase } from '../hooks/firebaseUtils';
+import handleUpdateFlights from '../components/flightList';
 
+import auth from '@react-native-firebase/auth';
 
 function Booking(): JSX.Element {
   const [date, setDate] = useState('');
@@ -24,6 +27,29 @@ function Booking(): JSX.Element {
   const [selectedDate, setSelectedDate] = useState('');
   const {step, setStep, nextClick, texTitle, buttonTitle, formatDate} =
     HandleNext();
+
+  const handleUploadData = async () => {
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const userId = user.uid;
+        await uploadDataToFirebase(
+          departurecity,
+          departurestate,
+          destinationcity,
+          destinationstate,
+          passangers,
+          date,
+          userId
+        );
+        navigation.replace('MyFlights');
+      } else {
+        console.log('No user is currently authenticated');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <SafeAreaView style={BookingStyles.background}>
@@ -88,7 +114,14 @@ function Booking(): JSX.Element {
               )}
             </View>
           </View>
-          <Pressable style={BookingStyles.button} onPress={nextClick}>
+          <Pressable style={BookingStyles.button} 
+            onPress={() => {
+              if (step === 4) {
+                handleUploadData();
+              } else {
+                nextClick();
+              }
+            }}>
             <Text style={BookingStyles.textButton}>{buttonTitle()}</Text>
           </Pressable>
         </View>

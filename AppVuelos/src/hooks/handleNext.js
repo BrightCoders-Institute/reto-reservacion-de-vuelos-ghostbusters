@@ -27,6 +27,7 @@ const HandleNext = () => {
   const buttonTitle = () => {
     if (step === 4) {
       return 'Finish';
+      
     } else {
       return 'Next';
     }
