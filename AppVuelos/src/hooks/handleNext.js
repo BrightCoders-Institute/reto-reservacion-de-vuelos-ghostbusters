@@ -43,6 +43,7 @@ const HandleNext = () => {
     step,
     setStep,
     nextClick,
+    isStepValid,
     texTitle,
     buttonTitle,
     formatDate

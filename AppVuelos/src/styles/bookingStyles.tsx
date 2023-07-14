@@ -20,7 +20,7 @@ const BookingStyles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: secondaryColor,
+    backgroundColor: primaryColor,
     paddingVertical: 10,
     borderRadius: 10,
     marginBottom: 40,
