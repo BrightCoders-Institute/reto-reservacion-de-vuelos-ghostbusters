@@ -5,6 +5,7 @@ import Flight from './flight';
 import FlightStyles from '../styles/flightsStyles';
 import {GetFlights, updateFlights} from '../hooks/getFlights'
 import auth from '@react-native-firebase/auth';
+import myFlightsStyles from '../styles/myFlightsStyles';
 
 interface FlightList {
   userId: string;
@@ -61,7 +62,7 @@ const FlightList = () => {
   const renderEmptyList = (): JSX.Element => {
     return (
       <View>
-        <Text>No Flights Found</Text>
+        <Text style={myFlightsStyles.empty}>No Flights Found</Text>
       </View>
     );
   };

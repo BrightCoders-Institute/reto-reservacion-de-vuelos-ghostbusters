@@ -7,6 +7,21 @@ const HandleNext = () => {
     setStep(step + 1);
   };
 
+  const isStepValid = () => {
+    switch (step) {
+      case 0:
+        return departurecity !== '' && departurestate !== '';
+      case 1:
+        return destinationcity !== '' && destinationstate !== '';
+      case 2:
+        return date !== '';
+      case 3:
+        return passangers > 0;
+      default:
+        return true;
+    }
+  };
+
   const texTitle = () => {
     switch (step) {
       case 0:

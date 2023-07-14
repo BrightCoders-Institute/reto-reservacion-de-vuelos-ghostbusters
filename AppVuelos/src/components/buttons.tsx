@@ -31,7 +31,7 @@ const Buttons: React.FC<ButtonProps> = ({label, disabled, onPress}) => {
       },500)
       setTimeout(() => {
         setvisible(false);
-        navigation.replace('Test')
+        navigation.replace('MyFlights')
       },1000)
     });
   }
