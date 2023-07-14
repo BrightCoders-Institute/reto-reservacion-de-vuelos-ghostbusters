@@ -9,7 +9,7 @@ interface Flight {
   cityAbbreviation: string;
   cityName: string;
   countryName: string;
-}
+} /*Se usa este bloque? */
 
 interface SelectProps {
   city: string;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const HandleNext = () => {
   const [step, setStep] = useState(0);

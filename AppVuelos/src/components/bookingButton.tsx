@@ -1,11 +1,9 @@
 import React from "react";
-import {Text, Pressable, View} from "react-native";
+import {Pressable, View} from "react-native";
 import bookingButtonsStyles from "../styles/bookingButtonsStyles";
-import myFlightsStyles from "../styles/myFlightsStyles";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { whiteColor } from "../styles/colors";
 import {useNavigation} from '@react-navigation/native';
-import {Link} from '@react-navigation/native';
 
 const BookingButton = () => {
   const navigation = useNavigation<any>();

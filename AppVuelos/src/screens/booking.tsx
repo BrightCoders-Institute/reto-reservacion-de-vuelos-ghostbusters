@@ -11,7 +11,6 @@ import {primaryColor, blackColor} from '../styles/colors';
 import HandleNext from '../hooks/handleNext';
 import PassangersPicker from '../components/passangersPicker';
 import { uploadDataToFirebase } from '../hooks/firebaseUtils';
-import handleUpdateFlights from '../components/flightList';
 
 import auth from '@react-native-firebase/auth';
 

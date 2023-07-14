@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { accentColor, blackColor, secondaryColor, primaryColor, whiteColor } from "./colors";
+import { blackColor, primaryColor, whiteColor } from "./colors";
 
 const BookingStyles = StyleSheet.create({
   container: {
