@@ -12,10 +12,8 @@ function Test(): JSX.Element {
   const handleOnLogOut = async () => {
     try {
       await handleLogOut();
-      console.log('After handleLogOut'); /*Delete comments */
       navigation.replace('Login');
     } catch (error) {
-      console.log('Error:', error); /*Delete comments */
     }
   };
   return (

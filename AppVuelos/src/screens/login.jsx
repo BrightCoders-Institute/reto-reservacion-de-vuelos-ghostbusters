@@ -45,7 +45,6 @@ function Login() {
       const user = await handleLogIn(email, password);
       if (user.hasOwnProperty('typeError')) {
         setvisible(true);
-        console.log(user);
         setIcon('close-circle-outline');
         setConfirmation('Error');
         setTimeout(() => {
@@ -69,7 +68,6 @@ function Login() {
         },2000)
       }
     } catch (error) {
-      console.error('Error signing up:', error);
     }
   };
 
