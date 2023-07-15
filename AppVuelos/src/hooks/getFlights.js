@@ -1,7 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
 
-const GetFlights = async () => {
+export const GetFlights = async () => {
   try {
     const collection = await firestore()
       .collection('vuelos')
@@ -17,4 +16,11 @@ const GetFlights = async () => {
   }
 };
 
-export default GetFlights;
+export const updateFlights = async (setFlights) => {
+  try {
+    const flightData = await GetFlights();
+    setFlights(flightData);
+  } catch (error) {
+    throw error;
+  }
+}

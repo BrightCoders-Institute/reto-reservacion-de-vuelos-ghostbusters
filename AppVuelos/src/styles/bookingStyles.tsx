@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { accentColor, blackColor, secondaryColor, primaryColor, whiteColor } from "./colors";
+import { blackColor, primaryColor, whiteColor } from "./colors";
 
 const BookingStyles = StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ const BookingStyles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: secondaryColor,
+    backgroundColor: primaryColor,
     paddingVertical: 10,
     borderRadius: 10,
     marginBottom: 40,

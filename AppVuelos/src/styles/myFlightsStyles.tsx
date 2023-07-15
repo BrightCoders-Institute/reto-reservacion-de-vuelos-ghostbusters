@@ -28,6 +28,11 @@ const myFlightsStyles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 8,
     borderRadius: 10,
+  },
+  empty: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '700',
   }
 });
 

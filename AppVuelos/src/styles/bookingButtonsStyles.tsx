@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { primaryColor, whiteColor } from "./colors";
+import { primaryColor } from "./colors";
 
 const bookingButtonsStyles = StyleSheet.create({
   button: {

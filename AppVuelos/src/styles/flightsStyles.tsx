@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { accentColor, blackColor, secondaryColor } from "./colors";
+import { blackColor, secondaryColor } from "./colors";
 
 const FlightStyles = StyleSheet.create({
   container: {

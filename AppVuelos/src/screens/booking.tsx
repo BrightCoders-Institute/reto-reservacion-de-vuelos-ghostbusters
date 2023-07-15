@@ -10,7 +10,9 @@ import {Calendar} from 'react-native-calendars';
 import {primaryColor, blackColor} from '../styles/colors';
 import HandleNext from '../hooks/handleNext';
 import PassangersPicker from '../components/passangersPicker';
+import { uploadDataToFirebase } from '../hooks/firebaseUtils';
 
+import auth from '@react-native-firebase/auth';
 
 function Booking(): JSX.Element {
   const [date, setDate] = useState('');
@@ -20,21 +22,53 @@ function Booking(): JSX.Element {
   const [destinationstate, setDestinationState] = useState('');
   const [passangers, setPassangers] = useState(0);
   const navigation = useNavigation<any>();
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
   const {step, setStep, nextClick, texTitle, buttonTitle, formatDate} =
     HandleNext();
+
+  const handleUploadData = async () => {
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const userId = user.uid;
+        await uploadDataToFirebase(
+          departurecity,
+          departurestate,
+          destinationcity,
+          destinationstate,
+          passangers,
+          date,
+          userId
+        );
+        navigation.replace('MyFlights');
+      } else {
+        console.log('No user is currently authenticated');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const isStepValid = () => {
+    switch (step) {
+      case 0:
+        return departurecity !== '' && departurestate !== '';
+      case 1:
+        return destinationcity !== '' && destinationstate !== '';
+      case 2:
+        return date !== '';
+      case 3:
+        return passangers > 0;
+      default:
+        return true;
+    }
+  };
 
   return (
     <SafeAreaView style={BookingStyles.background}>
       <View style={BookingStyles.container}>
         <Pressable onPress={() => navigation.replace('MyFlights')}>
-          <Ionicons
-            style={{alignSelf: 'flex-start'}}
-            name="chevron-back"
-            size={30}
-            color={primaryColor}
-          />
+          <Ionicons style={{alignSelf: 'flex-start'}} name="chevron-back" size={30} color={primaryColor} />
         </Pressable>
         <View style={BookingStyles.bookingContainer}>
           <View style={BookingStyles.body}>
@@ -88,7 +122,18 @@ function Booking(): JSX.Element {
               )}
             </View>
           </View>
-          <Pressable style={BookingStyles.button} onPress={nextClick}>
+          <Pressable style={[
+            BookingStyles.button,
+            { backgroundColor: isStepValid() ? primaryColor : 'gray' },
+          ]} 
+            onPress={() => {
+              if (step === 4) {
+                handleUploadData();
+              } else {
+                nextClick();
+              }
+            }}
+            disabled={!isStepValid()}>
             <Text style={BookingStyles.textButton}>{buttonTitle()}</Text>
           </Pressable>
         </View>
